@@ -1,0 +1,118 @@
+.Categories {
+    display: flex;
+    flex-direction: column;
+
+    .CategoryList {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .MainBtn {
+        margin-top: 15px;
+        align-self: center;
+    }
+}
+
+.CategoryItem {
+    text-align: center;
+    box-shadow: 1px 1px 8px -2px #3d3d3d;
+    cursor: pointer;
+}
+
+
+.Dishes {
+    display: flex;
+    flex-direction: column;
+
+    > .MainBtn {
+        align-self: center;
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+}
+
+.DishList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-self: center;
+    margin: 0 auto;
+    width: auto;
+    max-width: 870px;
+
+    .DishItem {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        box-shadow: 1px 1px 8px -2px #3d3d3d;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 30px 20px 0 20px;
+        width: 250px;
+
+        .Dish_img {
+            width: 230px;
+            height: auto;
+        }
+
+        .Dish_price {
+            font-weight: bold;
+        }
+        h2 {
+            text-align: center;
+            align-self: center;
+        }
+
+        .Dish_Btns {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+    }
+}
+
+.CurrentStopList {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    h2 {
+        align-self: center;
+    }
+    #StopList {
+        margin-top: 15px;
+        .scroll-table-body {
+            max-height: 350px;
+        }
+    }
+    button {
+        align-self: center;
+    }
+
+}
+
+#NewCategoryForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    button {
+        margin-top: 10px;
+    }
+}
+
+#NewDishForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+
+    .InputWithIcon {
+        margin-top: 10px;
+    }
+    .AwesomeFileInput {
+        margin-top: 10px;
+    }
+    button {
+        margin-top: 10px;
+    }
+}

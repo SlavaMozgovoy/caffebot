@@ -1,0 +1,28 @@
+.AllUsers {
+    margin-top: 30px;
+
+    .SearchPanel {
+        display: flex;
+
+        select {
+            margin-right: 10px;
+        }
+    }
+
+    #UsersTable {
+        margin-top: 15px;
+
+        .scroll-table-body {
+            max-height: 300px;
+        }
+    }
+}
+
+#BlockUserForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    button {
+        margin-top: 10px;
+    }
+}

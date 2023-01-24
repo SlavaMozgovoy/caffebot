@@ -1,0 +1,99 @@
+.scroll-table-body {
+	overflow-x: auto;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #eee;
+
+}
+.scroll-table table {
+	width:100%;
+	table-layout: fixed;
+	border: none;
+    border-spacing: 0;
+    line-height: 25px;
+    letter-spacing: 1px;
+    color: $mainTextColor;
+}
+.scroll-table thead tr th {
+	font-weight: bold;
+	text-align: left;
+	border: none;
+    color: #fff;
+	background: $themeColor;
+	font-size: 14px;
+    height: 25px;
+    text-align: center;
+
+}
+.scroll-table tbody td {
+	text-align: left;
+	font-size: 14px;
+	vertical-align: center;
+    border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+    height: 25px;
+	padding-left: 2px;
+
+	button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        &.safely {
+            color: $successColor;
+        }
+        &.danger {
+            color: $altThemeColor;
+        }
+    }
+    a {
+        background-color: transparent;
+        border: none;
+        font-weight: bold;
+    }
+}
+.scroll-table tbody tr:nth-child(even){
+	background: #f3f3f3;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+} 
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+} 
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+}
+
+/* Стили для скролла */
+
+
+// table {
+//     text-align: left;
+//     border-collapse: separate;
+//     border-spacing: 5px;
+//     border-radius: 10px;
+//     color: $mainTextColor;
+//     box-shadow: 1px 1px 8px -2px #3d3d3d;
+//     letter-spacing: 2px;
+//     .TableLegend {
+//         font-weight: 600;
+//     }
+
+// }
+// td {
+//     width: 120px;
+//     background-color: #f7f7f7;
+//     button {
+//         background-color: transparent;
+//         border: none;
+//         letter-spacing: 2px;
+//         cursor: pointer;
+//         &.safely {
+//             color: $successColor;
+//         }
+//         &.danger {
+//             color: $altThemeColor;
+//         }
+//     }
+// }

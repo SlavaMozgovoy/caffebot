@@ -1,0 +1,130 @@
+.OrderContent {
+    display: flex;
+    height: 300px;
+    margin-top: 30px;
+}
+
+.OrderInfo {
+    min-width: 300px;
+    height: 100%;
+    box-shadow: 1px 1px 8px -2px #3d3d3d;
+    margin-right: 5px;
+    ul {
+        padding-left: 20px;
+        li {
+            margin-top: 5px;
+        }
+    }
+}
+
+
+
+#OrderPositions {
+    min-height: 300px;
+    box-shadow: 1px 1px 8px -2px #3d3d3d;
+    display: flex;
+    flex-direction: column;
+}
+
+#OrderActions {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    #Accept-item .Accordion-item_content{
+        button {
+            margin: 15px;
+            align-self: center;
+        }
+    }
+}
+
+#AcceptForm {
+    display: flex;
+    margin-top: 15px;
+    .InputWithIcon {
+        margin: 0 10px;
+    }
+}
+#DeclineForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    .InputWithIcon {
+        width: 98%;
+        align-self: center;
+    }
+    button {
+        align-self: center;
+        margin: 15px;
+    }
+}
+
+#EditPositions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    button {
+        margin-top: 20px;
+    }
+}
+
+
+.ButtonArea {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#AddDishToOrderModal {
+    .InputWithIcon {
+        margin-top: 20px;
+    }
+}
+
+.Dishes {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 20px;
+
+    max-height: 600px;
+    overflow-y: auto;
+
+    padding: 0 8px;
+
+    .Dish {
+        display: flex;
+        padding: 5px;
+        box-shadow: 1px 1px 8px -2px #3d3d3d;
+        border-radius: 10px;
+        align-items: center;
+        justify-content: space-between;
+
+        margin: 5px 0;
+
+        & > * {
+            margin: 0 5px;
+        }
+        input {
+            width: 40px;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid #4a4a4a;
+        }
+        button {
+            background-color: #f7f7f7;
+            outline: none;
+            border: none;
+            box-shadow: 1px 1px 8px -2px #3d3d3d;
+            border-radius: 5px;
+            padding: 4px;
+            font-size: 20px;
+            transition: .5s;
+            &:hover {
+                box-shadow: 1px 1px 8px -2px $themeColor;
+                color: $themeColor;
+                letter-spacing: 2px;
+            } 
+        }
+    }
+}

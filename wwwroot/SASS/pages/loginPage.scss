@@ -1,0 +1,64 @@
+#login {
+    padding: 0;
+}
+
+.LoginWindow {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 400px;
+    height: 450px;
+    position: relative;
+
+
+    border-radius: 15px;
+    box-shadow: 1px 1px 4px #d3d3d3;
+}
+
+.LoginWindow-label {
+    position: absolute;
+    z-index: 1;
+    top: 6px;
+    left: 6px;
+    color: #4a4a4a;
+}
+
+.LoginWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    margin-top: 60px;
+}
+
+.LoginWindow-img {
+    width: 200px;
+}
+
+.LoginWindow-form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin-top: 30px;
+    min-width: 80%;
+
+}
+
+
+
+.LoginBtn {
+    border: none;
+    outline: none;
+    font-size: 18px;
+    padding: 6px 10px;
+    border-radius: 10px;
+    background-color: #D96E4C;
+    color: #f3f3f3;
+}
+
+.LoginWindow-form_pass {
+    margin-top: 25px;
+}
+.LoginWindow-form_btn {
+    margin-top: 25px;
+}

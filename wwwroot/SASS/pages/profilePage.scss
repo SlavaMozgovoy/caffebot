@@ -1,0 +1,54 @@
+.ProfileContent {
+    display: flex;
+    height: 300px;
+    margin-top: 50px;
+}
+
+.ProfileInfo {
+    min-width: 300px;
+    height: 100%;
+    box-shadow: 1px 1px 8px -2px #3d3d3d;
+    margin-right: 5px;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    ul {
+        padding-left: 20px;
+        li {
+            margin-top: 5px;
+        }
+    }
+    & > button, a {
+        position: absolute;
+        right: 20px;
+        left: 20px;
+        bottom: 20px;
+    }
+}
+
+#UserOrderHistory {
+    min-height: 300px;
+    box-shadow: 1px 1px 8px -2px #3d3d3d;
+    .scroll-table-body {
+        max-height: 275px;
+    }
+}
+
+.SendUserMessage {
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    h2 {
+        text-align: center;
+    }
+
+    .AwesomeTextArea {
+        margin-top: 15px;
+    }
+    .AddFile {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+    }
+}

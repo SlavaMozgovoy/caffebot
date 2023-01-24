@@ -1,0 +1,20 @@
+.MainBtn {
+    padding: 0 10px;
+    line-height: 30px;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    letter-spacing: 1px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    color: $mainTextColor;
+    box-shadow: 1px 1px 8px -2px #3d3d3d;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.MainBtn:hover {
+    box-shadow: 1px 1px 8px -2px $themeColor;
+    /* background-color: #f7226a; */
+    letter-spacing: 2px;
+}

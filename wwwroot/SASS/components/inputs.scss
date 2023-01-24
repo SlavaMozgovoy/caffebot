@@ -1,0 +1,112 @@
+.InputWithIcon {
+    width: 100%;
+    min-width: 200px;
+    position: relative;
+}
+
+.InputWithIcon_icon {
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    z-index: 1;
+    left: 6px;
+    top: 50%; transform: translateY(-50%);
+}
+
+.InputWithIcon_input {
+    width: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #bcbcbc;
+    /* box-shadow: 1px 1px 4px #d3d3d3; */
+    /* border-radius: 10px; */
+    height: 30px;
+    line-height: 30px;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    color: #4a4a4a;
+    padding: 6px 10px;
+    padding-right: 0;
+    padding-left: 35px;
+    position: relative;
+}
+
+.AwesomeTextArea {
+    position: relative;
+    box-shadow: 1px 1px 8px -2px #3d3d3d;
+    border-radius: 10px;
+    padding: 5px;
+    .Placeholder {
+        position: absolute;
+        top:45%;
+        left:50%;
+        transform:translate(-50%, -50%);
+        z-index: 1;
+        text-align: center;
+        color: #12334e;
+        font-size: 1.5em;
+        letter-spacing: 2px;
+        transition: 1s;
+        opacity: 1;
+        pointer-events: none;
+    }
+    .Area {
+        position: relative;
+        min-height: 200px;
+        resize: none;
+        width: 100%;
+        font-size: 1.2em;
+        letter-spacing: 2px;
+        color: #4a4a4a;
+        border: none;
+        outline: none;
+        transition: 1s;
+        padding: 10px;
+    }
+    &.active {
+        .Placeholder {
+            top: 30%;
+            opacity: 0;
+        }
+    }
+}
+
+.AwesomeFileInput {
+    letter-spacing: 2px;
+    font-size: 1em;
+    cursor: pointer;
+    display: flex;
+    input[type="file"] {
+        display: none;
+    }
+    .AwesomeFileInput_btn {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        padding: 6px 12px;
+        display: inline-flex;
+        align-items: center;
+
+        ion-icon {
+            padding-right: 5px;
+        }
+
+    }
+    .AwesomeFileInput_state {
+        align-self: center;
+        padding-left: 20px;
+    }
+}
+
+select {
+    height: 30px;
+    line-height: 30px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    letter-spacing: 2px;
+    outline: none;
+    border: none;
+    box-shadow: 1px 1px 8px -2px #3d3d3d;
+    padding: 0 10px;
+}

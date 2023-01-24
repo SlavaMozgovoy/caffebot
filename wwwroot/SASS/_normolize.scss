@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.hide {
+    display: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 960px;
+    min-height: 100%;
+    margin: 0 auto;
+}
+
+textarea {
+    resize: none;
+}
+
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: $mainTextColor;
+}
+
+section {
+    padding-top: 60px;
+    min-height: 100vh;
+}
+
+body.overflow-hiden {
+    overflow: hidden;
+}

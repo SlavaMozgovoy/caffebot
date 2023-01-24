@@ -1,0 +1,37 @@
+.Accordion {
+
+    &-item {
+        &_label {
+            
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            background-color: $themeColor;
+            letter-spacing: 1px;
+            font-weight: bold;
+            color: #fff;
+            // Модификаторы
+            &.danger {
+                background-color: $altThemeColor;
+            }
+            &.neutral {
+                background-color: transparent;
+                color: $mainTextColor;
+                box-shadow: 1px 1px 8px -2px #3d3d3d;
+                border-radius: 5px;
+            }
+        }
+        &_content {
+            overflow: hidden;
+            max-height: 0;
+            transition: 0.3s ease-in-out;
+            box-shadow: 1px 1px 8px -2px #3d3d3d;
+            border-top: none;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    &-item:not(:nth-child(1)) {
+        margin-top: 5px;
+    }
+}

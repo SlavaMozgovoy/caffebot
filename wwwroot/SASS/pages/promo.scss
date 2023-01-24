@@ -1,0 +1,71 @@
+ .CurrentPromo {
+    display: flex;
+    flex-direction: column;
+ }
+ 
+ .CurrentPromo_list {
+    display: flex;
+    flex-direction: column;
+ }
+
+.CurrentPromo_item {
+    display: flex;
+    margin-top: 30px;
+}
+
+.CurrentPromo_img {
+    width: auto ;
+    height: 400px;
+    box-shadow: 1px 1px 8px -2px #3d3d3d;
+}
+
+.CurrentPromo_content {
+    margin-left: 5px;
+    box-shadow: 1px 1px 8px -2px #3d3d3d;
+    display: flex;
+    width: 100%;
+    position: relative;
+    flex-direction: column;
+    .ContentWrap {
+        padding: 20px;
+    }
+    h2 {
+        text-align: center;
+    }
+    p {
+        margin-top: 15px;
+        text-align: justify;
+        max-height: 250px;
+        overflow-y: auto;
+    }
+    .MainBtn {
+        align-self: flex-end;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+
+.AddNewPromo, .Mailing{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+
+    h2 {
+        text-align: center;
+    }
+
+    .AwesomeTextArea {
+        margin-top: 15px;
+    }
+
+    .AddFile {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+    }
+}
+.Mailing {
+    margin-bottom: 50px;
+}

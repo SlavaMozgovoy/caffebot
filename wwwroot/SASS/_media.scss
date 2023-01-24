@@ -1,0 +1,229 @@
+//Login 
+@media (max-width: 460px) {
+    .LoginWindow {
+        width: 100%;
+        height: 100vh;
+        box-shadow: none;
+    }
+    .LoginWrapper {
+        margin: auto;
+    }
+}
+
+
+// orderPage 
+@media (max-width: 900px) {
+    .CurrentOrders {
+        max-width: 580px;
+    }
+}
+@media (max-width: 600px) {
+    .CurrentOrders {
+        max-width: 290px;
+    }
+    .ClosedOrders {
+        .SearchPanel {
+            flex-direction: column;
+
+            #closedChecks_Date {
+                margin: 0;
+                width: 100%;
+            }
+        }
+    }
+}
+@media (max-width: 960px) {
+    .ClosedOrders {
+        width: 95%;
+        align-self: center;
+    }
+
+}
+
+// DetailsOrderPage
+@media (max-width: 800px) {
+    .OrderContent {
+        flex-direction: column;
+        height: 575px;
+        .OrderInfo {
+            width: 100%;
+            margin: 0;
+            min-height: 250px;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+@media (max-width: 960px) {
+    .OrderContent {
+        width: 95%;
+        align-self: center;
+    }
+    #OrderActions {
+        width: 95%;
+        align-self: center;
+    }
+}
+
+@media (max-width: 560px) {
+    #AcceptForm {
+        flex-direction: column;
+        .InputWithIcon{
+            margin: 10px 0 0 0;
+            width: 300px;
+            align-self: center;
+        }
+    }
+    
+}
+
+// promo 
+@media (max-width: 960px) {
+    .CurrentPromo_list {
+        width: 95%;
+        align-self: center;
+    }
+    .AddNewPromo, .Mailing {
+        width: 95%;
+        align-self: center;
+    }
+}
+@media (max-width: 700px) {
+    .CurrentPromo_item {
+        flex-direction: column;
+    }
+    .CurrentPromo_img {
+        align-self: center;
+        width: 300px;
+        height: auto;
+    }
+    .CurrentPromo_content {
+        align-self: center;
+        width: 300px;
+        height: 0;
+        overflow: hidden;
+        transition: 0.3s ease-in-out;
+        margin: 0;
+        p {
+            height: 200px;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .Mailing, .AddNewPromo {
+        .AddFile {
+            flex-direction: column;
+            button {
+                margin-top: 15px;
+                align-self: center;
+            }
+        }
+        .AwesomeFileInput_state {
+            text-align: right;
+        }
+        .AwesomeFileInput {
+            justify-content: space-between;
+        }
+    }
+}
+
+// menuEditor 
+
+@media (max-width: 960px) {
+    .Categories {
+        width: 95%;
+        align-self: center;
+    }
+    .CurrentStopList {
+        width: 95%;
+        align-self: center;
+    }
+}
+
+@media (max-width: 916px) {
+    .DishList {
+        max-width: 580px;
+    }
+}
+
+@media (max-width: 610px) {
+    .DishList {
+        max-width: 290px;
+    }
+}
+
+
+// users
+@media (max-width: 960px) {
+    .AllUsers {
+        max-width: 95%;
+        align-self: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .AllUsers > .SearchPanel {
+        flex-direction: column;
+        select {
+            text-align: center;
+            margin: 0;
+        }
+        .InputWithIcon {
+            margin-top: 10px;
+        }
+    }
+}
+
+@media (max-width: 960px) {
+    .ProfileContent {
+        width: 95%;
+        align-self: center;
+    }
+    .SendUserMessage {
+        width: 95%;
+        align-self: center;
+    }
+}
+
+@media (max-width: 800px) {
+    .ProfileContent {
+        flex-direction: column;
+        height: 575px;
+        .ProfileInfo {
+            width: 100%;
+            margin: 0;
+            min-height: 250px;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .SendUserMessage {
+        .AddFile {
+            flex-direction: column;
+            button {
+                margin-top: 15px;
+                align-self: center;
+            }
+        }
+        .AwesomeFileInput_state {
+            text-align: right;
+        }
+        .AwesomeFileInput {
+            justify-content: space-between;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .inDoorOrder {
+        width: 95%;
+        box-shadow: none;
+        & > * > button {
+            margin-top: 20px;
+        }
+    }
+}
+
