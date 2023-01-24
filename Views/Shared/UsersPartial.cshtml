@@ -1,0 +1,10 @@
+﻿@model List<OrderByDateModel>
+    @foreach(OrderByDateModel order in Model.Where(d=>d.IsConfirmed == OrderStatus.CONFIRMED)){
+    <tr>
+        <td ><a style="color: #f7226a" asp-action="OrderInfo" asp-controller="Order" asp-route-id="@order.OrderId">@order.OrderId</a></td>
+        <td class="UserName"><a style="color: #f7226a" asp-action="UserProfile" asp-controller="User" asp-route-id="@order.ProfileId">@order.UserName</a></td>
+        <td>@order.BonusTotal <span class="BonusChange">(@order.BonusChange)</span></td>
+        <td class = "OrderClosedTime">@order?.ConfirmTime.Value.ToString("dd.MM.yyyy")</td>
+        <td>@order.Fixal</td>
+                               
+    </tr>}

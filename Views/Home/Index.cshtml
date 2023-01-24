@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Заказы";
+}
+ <section id = 'orders'>
+        <div class="container">
+            <h1 class="Title">Заказы</h1>
+            <h2 class="Title">Активные заказы</h2>
+            
+            <div id="currentOrders" class="CurrentOrders">
+               
+            </div>
+            <div class="ReportBlock">
+                <h2>Сделать отчет</h2>
+                <form id="ReportForm">
+                    <div class="InputWithIcon">
+                        <ion-icon class="InputWithIcon_icon" name="calendar-outline"></ion-icon>
+                        <input id="ReportRange" class="InputWithIcon_input" type="text" placeholder="Диапазон отчета"/>
+                    </div>
+                    <div href="#" class="MainBtn" id="MakeReport">Скачать</div>
+                </form>
+            </div>
+            <h2 class="Title">Закрытые заказы</h2>
+            
+            <div class="ClosedOrders">
+                <div class="SearchPanel">
+                    <div class="InputWithIcon" id = "closedChecks_Date">
+                        <ion-icon class="InputWithIcon_icon" name="calendar-outline"></ion-icon>
+                        <input id = 'DateSearch' class="InputWithIcon_input" type="text" placeholder="Выбор даты"/>
+                    </div>
+                    <div class="InputWithIcon">
+                        <ion-icon class="InputWithIcon_icon" name="person-outline"></ion-icon>
+                        <input id="LiveSearcherInput" class="InputWithIcon_input" type="text" placeholder="Поиск по имени..."/>
+                    </div>
+                </div>
+                <div  id="closedOrderTable" style="overflow-x:auto" class="scroll-table">
+                    <table style="min-width: 500px; margin-bottom: 300px" >
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>User</th>
+                                <th>Value</th>
+                                <th>Time</th>
+                                <th>Fiscal</th>
+                            </tr>
+                        </thead>
+                    	
+                        <tbody class="scroll-table-body" id="tableUsers" style="min-width: 500px">
+                        
+                        </tbody>	
+                    </table>
+                </div>
+            </div>
+        </div>
+</section>
+@section Scripts{
+    <script type="text/javascript" src="/js/dataPicker.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/js/ordersPolling.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/js/reportInRange.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,59 @@
+﻿@using System.Security.Claims
+<!DOCTYPE html>
+@{
+    bool IsHead(ClaimsPrincipal User)
+    {
+        return User.HasClaim(claim => claim.Type == ClaimTypes.Role && claim.Value == "Head");
+    }
+    bool IsAdmin(ClaimsPrincipal User)
+    {
+        return User.HasClaim(claim => claim.Type == ClaimTypes.Role && claim.Value == "Administrator");
+    }
+}
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"]</title>
+
+        <link rel="stylesheet" href="~/modules/air-datepicker/air-datepicker.css" asp-append-version="true">
+        <link rel="stylesheet" href="~/styles/main.css" asp-append-version="true">
+
+    </head>
+    <body>
+         <header id="header">
+            <a asp-action="Index" asp-controller="Home" class="logo">Панель администратора</a>
+            <div id="toggle"></div>
+            <div id="navbar">
+                <ul>
+                    <li><a asp-action="Index" asp-controller="Home">Заказы</a></li>
+                    @if (IsHead(User)){
+                    <li><a asp-action="Spam" asp-controller="Home">Акции</a></li>
+                    }
+                    @if (IsAdmin(User))
+                    {
+                    <li><a asp-action="Users" asp-controller="User">Пользователи</a></li>
+                    <li><a asp-action="Dishes" asp-controller="Dish">Блюда</a></li>
+                    }
+                    <li><a asp-controller="Login" asp-action="LogOut">Выход</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+        <script src="/modules/air-datepicker/air-datepicker.js"></script>
+        <script type="text/javascript" src="/js/navbar.js" asp-append-version="true"></script>
+        <script type="text/javascript" src="/js/live-search.js" asp-append-version="true"></script>
+        
+        <script type="text/javascript" src="/js/EditModal.js" asp-append-version="true"></script>
+        <script type="text/javascript" src="/js/textArea.js" asp-append-version="true"></script>
+        <script type="text/javascript" src="/js/accordion.js" asp-append-version="true"></script>
+        @await RenderSectionAsync("Scripts", false)
+    </body>
+</html>

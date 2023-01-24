@@ -1,0 +1,204 @@
+﻿@using System.Security.Claims
+@model Order
+@{
+
+    bool IsAdmin(ClaimsPrincipal user)
+    {
+        return user.HasClaim(c => c.Type == ClaimTypes.Role && c.Value == "Administrator");
+    }
+        bool IsHead(ClaimsPrincipal user)
+    {
+        return user.HasClaim(c => c.Type == ClaimTypes.Role && c.Value == "Head");
+    }
+    var status = Model.IsConfirmed switch
+    {
+        OrderStatus.CONFIRMED => ("color: green","ПОДТВЕРЖДЕН"),
+        OrderStatus.DECLINED => ("color: red","ОТКЛОНЁН"),
+        _ => ("color: gray","НЕ ПОДТВЕРЖДЕН"),
+    };
+    ViewBag.Title = "Заказ №" + @Model.OrderId;
+}
+<section id="OrderDetailsPage">
+        <div class="container">
+            <h1 class="Title">Заказ №@Model.OrderId</h1>
+
+            <div class="OrderContent">
+                <div class="OrderInfo">
+                    <h2 class="Title">Детали заказа</h2>
+                    <ul>
+                        <li>Время: <span class="time">@Model.OrderTime</span></li>
+                        <li>Имя: <span style="color: #f7226a"><a style="color: #f7226a" asp-action="UserProfile" asp-controller="User" asp-route-id="@Model.ProfileId">@Model.Profile.Name</a></span></li>
+                        <li>Телефон: <span class="phone">@Model.PhoneNumber</span></li>
+                        <li>Адрес: <span class="address">@Model.Address</span></li>
+                        @if (@Model.Cart.Desctiption != null){
+                            <li>Примечание: <span class="description">@Model.Cart.Desctiption</span></li>
+                         }
+                        @{
+                            var total = Model.Cart.Positions.Sum(i => i.Count * i.Dish.Price);
+                        }
+                         @if (Model.IsConfirmed == OrderStatus.CONFIRMED)
+                        {
+                            @if (IsHead(User))
+                            {
+                                <form asp-controller="Order" asp-action="SetFixal" asp-route-id="@Model.OrderId">
+                                <li><div>Фискальный чек:</div> <input type="text" style="width:100px" name="Fixal" value="@Model.Fixal"/> <button class="MainBtn" style="font-size:16px; line-height: 18px">Изменить</button><div>от @Model.ConfirmTime.Value.ToString("dd.MM.yyyy")</div></li>
+                                </form>
+                            }
+                            else
+                            {
+                                <li>Фискальный чек: <span class="time">№@Model.Fixal от @Model.ConfirmTime.Value.ToString("dd.MM.yyyy")</span></li>
+                            }
+                        }
+                        <li>Итоговая сумма: <span class="description">@total₽</span></li>
+
+                    @if (Model.IsPaidByBonuses)
+                    {
+                        <li><h2>ОПЛАТА БОНУСАМИ</h2></li>
+                    }
+                </ul>
+                </div>
+                <div id="OrderPositions" class="scroll-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Dish</th>
+                                <th>Count</th>
+                            @if (Model.IsConfirmed == OrderStatus.DEFAULT && IsAdmin(User))
+                            {
+                                <th>Edit</th>
+                            }
+                        </tr>
+                        </thead>
+                    </table>	
+                    <div class="scroll-table-body">
+                        <table>
+                            <tbody>
+                            @foreach (Position position in Model.Cart.Positions){
+                                <tr>
+                                    <td>@position.Dish.Name</td>
+                                    <td>@position.Count</td>
+                                    @if (Model.IsConfirmed == OrderStatus.DEFAULT && IsAdmin(User)){
+                                        <td><button onclick="editOrderModal.showModal(@position.DishId, '@position.Dish.Name', @position.Count)" class="danger OrderEditButton">Изменить</button></td>
+                                    }
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>	
+                    @if (IsAdmin(User) && Model.IsConfirmed == OrderStatus.DEFAULT ){
+                    <div class="ButtonArea">
+                        <button onclick="addDishModal.showModal()" class="MainBtn">Добавить блюдо</button>
+                    </div>
+                    }
+                </div>
+            </div>
+            <div style="margin-top: 10px; margin-bottom: 10px"><h3>Статус заказа: <span style="@status.Item1">@status.Item2</span></h3></div>
+            @if (IsAdmin(User) && Model.IsConfirmed == OrderStatus.DEFAULT){
+            <div id = 'OrderActions' class="Accordion">
+                <div class="Accordion-item" id = "Accept-item">
+                    <div class="Accordion-item_label">Подтвердить</div>
+                    <div class="Accordion-item_content">
+                        <form id="AcceptForm" method="post" asp-action="ConfirmOrder" asp-controller="Order" asp-route-id="@Model.OrderId">
+                            <div class="InputWithIcon">
+                                <ion-icon class="InputWithIcon_icon" name="bag-check-outline"></ion-icon>
+                                <input name="Fixal" class="InputWithIcon_input" type="text" placeholder="Номер чека"/>
+                            </div>
+                            <div class="InputWithIcon">
+                                <ion-icon class="InputWithIcon_icon" name="time-outline"></ion-icon>
+                                <input name="Date" class="InputWithIcon_input" type="text" value="@DateTime.Today" placeholder="Время и дата"/>
+                            </div>
+                        </form>
+                        <button class="MainBtn" form="AcceptForm" type="submit">Подтвердить</button>
+                    </div>
+                </div>
+                <div class="Accordion-item">
+                    <div class="Accordion-item_label danger">Отклонить</div>
+                    <div class="Accordion-item_content">
+                        <form id="DeclineForm" asp-action="DeclineOrder" asp-controller="Order" asp-route-id="@Model.OrderId">
+                            <div class="InputWithIcon">
+                                <ion-icon class="InputWithIcon_icon" name="document-text-outline"></ion-icon>
+                                <input name="DeclineReason" class="InputWithIcon_input" type="text" placeholder="Причина отказа"/>
+                            </div>
+                            <button class="MainBtn" type="submit">Отклонить</button>
+                        </form>
+                    </div>
+                </div>
+                <h2 style="text-align: center">@TempData["Error"]</h2>
+            </div>
+             }
+        </div>
+       
+        <div class="ModalWindow" id = "EditOrderModal">
+            <div class="ModalWindow_content">
+                <h3 class="Title"></h3>
+                <form id="EditPositions">
+                    <input name="OrderId" type="hidden" value="@Model.OrderId" />
+                    <div class="InputWithIcon">
+                        <ion-icon class="InputWithIcon_icon" name="restaurant-outline"></ion-icon>
+                        <input name="Count" class="InputWithIcon_input" type="number" min="0" placeholder="Количество"/>
+                    </div>
+                    <button class="MainBtn">Изменить</button>
+                </form>
+            </div>
+        </div>
+         <div class="ModalWindow" id = "AddDishToOrderModal">
+            <div class="ModalWindow_content" style="max-height:80%; overflow-x:scroll">
+                <h3 class="Title">Добавить блюдо</h3>
+                <div class="InputWithIcon">
+                    <ion-icon class="InputWithIcon_icon" name="restaurant-outline"></ion-icon>
+                    <input data-input oninput="onChange()" class="InputWithIcon_input" type="text" placeholder="Поиск" id="DishSearch"/>
+                </div>
+
+                <div class="Dishes">
+                    <table>
+                        @foreach (Dish dish in ViewBag.Dishes){
+                        <tr data-id >
+                            <td>
+                                <div class="Dish">
+                                    <div class="Dish-name">@dish.Name</div>
+                                    <form asp-action="AddPosition" asp-controller="Order" asp-route-id="@Model.OrderId" asp-route-dishId="@dish.DishId">
+                                        <input name="Count" type="number" min="1" class="Dish-count" value="1">
+                                        <button class="Dish-add">
+                                            <ion-icon name="add-outline"></ion-icon>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+</section>
+       
+@section Scripts{
+<script src="/js/editOrderModal.js" asp-append-version="true"></script>
+<script src="/js/AddDishModal.js" asp-append-version="true"></script>
+<script>
+    let accordionOrders = new Accordion("#OrderActions", ".Accordion-item_label", ".Accordion-item_content");
+    let addDishModal = new AddDishModal("#AddDishToOrderModal");
+
+function onChange(){
+    let input = document.querySelector("[data-input]").value;
+    let query = document.querySelectorAll("[data-id]");
+    if (input === "") {
+        query.forEach((div) => {
+            div.parentNode.style.visibility = "visible";
+        }); 
+    } 
+    else 
+    {
+        query.forEach((div) => {
+            let div2 = div;
+            let text = div.innerHTML;
+            if (text.toLowerCase().includes(input.toLowerCase())) {
+                div2.style.visibility = "visible";
+            } else {
+                div2.style.visibility = "collapse";
+            }
+        });
+    }
+}
+</script>
+}

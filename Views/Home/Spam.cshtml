@@ -1,0 +1,86 @@
+﻿@model Message
+@{
+    ViewData["Title"] = "Акции и рассылка";
+}
+<section id="promo">
+    <div class="container">
+        <div class="AddNewPromo">
+        <h1 class="Title">Рассылка сообщений</h1>
+        
+        <form id="mailingForm" asp-action="SendMessage" asp-controller="Home" enctype="multipart/form-data" method="post" class="MailForm">
+            <input type="hidden" name="returnUrl" value="@Context.Request.Path"/>
+            <h2>Отослать всем пользователям</h2>
+            <div class="AwesomeTextArea">
+                <div class="Placeholder">
+                    <div class="">Текст сообщения</div>
+                    <ion-icon name="image-outline"></ion-icon>
+                </div>
+                <textarea asp-for="@Model.Text" id="" cols="30" rows="10" class="Area" ></textarea>
+            </div>
+            <div class="mailingPage_addFile">
+                <label class="AwesomeFileInput DropArea">
+                    <input asp-for="@Model.File" type="file" accept=".png, .jpg, .jpeg">
+                    <div class="AwesomeFileInput_btn">
+                        <ion-icon name="image-outline"></ion-icon>
+                        Добавить фото
+                    </div>
+                    <div class="AwesomeFileInput_state">
+                        Файл не выбран
+                    </div>
+                </label>
+                <button class="MainBtn">Отправить</button>
+            </div>
+        </form>
+        <br />
+        <h2 style="color: #f7226a">@TempData["Error"]</h2>
+    </div>
+
+
+    <div class="CurrentPromo">
+        <h2 style="text-align: center">Действующие акции</h2>
+        <div class="CurrentPromo_list">
+            @foreach (Promotion promotion in ViewBag.Promotions){
+            <div class="CurrentPromo_item">
+                <img class="CurrentPromo_img" src="@promotion.ImagePath" alt="">
+                <div class="CurrentPromo_content">
+                    <div class="ContentWrap">
+                        <h2>Текст акции</h2>
+                        <p class="CurrentPromo_text">
+                            @promotion.Description
+                        </p>
+                        <a role="button" class="MainBtn" asp-action="RemovePromo" asp-controller="Home" asp-route-id="@promotion.PromotionId">Удалить</a>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+
+    <div class="AddNewPromo" style="margin-bottom: 50px">
+            <form method="post" enctype="multipart/form-data">
+                <h2>Добавить акцию</h2>
+                <div class="AwesomeTextArea">
+                    <div class="Placeholder">
+                        <div class="">Текст акции</div>
+                        <ion-icon name="image-outline"></ion-icon>
+                    </div>
+                    <textarea id="" cols="30" rows="10" class="Area" asp-for="@Model.Text" ></textarea>
+                </div>
+                <div class="AddFile">
+                    <label class="AwesomeFileInput">
+                        <input asp-for="@Model.File" type="file" accept=".png, .jpg, .jpeg">
+                        <div class="AwesomeFileInput_btn">
+                            <ion-icon name="image-outline"></ion-icon>
+                            Добавить фото
+                        </div>
+                        <div class="AwesomeFileInput_state">
+                            Файл не выбран
+                        </div>
+                    </label>
+                    <button  asp-action="AddPromo" asp-controller="Home" class="MainBtn">Добавить</button>
+                </div>
+            
+            </form>    
+           </div>
+    </div>
+ </section>

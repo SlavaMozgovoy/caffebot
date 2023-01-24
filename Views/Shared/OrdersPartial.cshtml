@@ -1,0 +1,18 @@
+﻿@model List<Order>
+
+ @foreach(Order order in Model.Where(d=>d.IsConfirmed == OrderStatus.DEFAULT)){
+                <div class="OrderCart">
+                    <i>New</i>
+                    <ul>
+                        <li>Время: <span class="time">@order.OrderTime</span></li>
+                        <li>Имя: <span><a style="color: #f7226a" asp-action="UserProfile" asp-controller="User" asp-route-id="@order.ProfileId">@order.Profile.Name</a></span></li>
+                        <li>Телефон: <span class="phone">@order.PhoneNumber</span></li>
+                        <li>Адрес: <span class="address">@order.Address</span></li>
+                        @{
+                            var totalSum = order.Cart.Positions.Sum(p => p.Count * p.Dish.Price);
+                        }
+                        <li>Сумма: <span class="total">@totalSum₽</span></li>
+                    </ul>
+                    <a class="MainBtn" asp-action="OrderInfo" asp-controller="Order" asp-route-id="@order.OrderId">Детали</a>
+                </div>
+                }

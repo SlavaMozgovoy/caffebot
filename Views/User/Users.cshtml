@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Пользователи";
+}
+
+<section id="Users">
+    <div class="container">
+        <h1 class="Title">Пользователи</h1>
+
+        <div class="AllUsers">
+            <div class="SearchPanel">
+                <select id="UserSearch">
+                    <option value="default" disabled>Показать:</option>
+                    <option value="allUsers">Все пользователи</option>
+                    <option value="blocked">Заблокированные</option>
+                </select>
+                <div class="InputWithIcon">
+                    <ion-icon class="InputWithIcon_icon" name="search-outline"></ion-icon>
+                    <input id="AllUsersSeach" class="InputWithIcon_input" type="text" placeholder="Поиск по имени"/>
+                </div>
+            </div>
+            <div id="UsersTable" class="scroll-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Bonuses</th>
+                            <th>Is Blocked</th>
+                        </tr>
+                    </thead>
+                </table>	
+                <div class="scroll-table-body">
+                    <table>
+                        <tbody id="BodyTable">
+                            @foreach(Profile user in Model)
+                            {
+                            <tr>
+                                <td class = 'UserName' data-value = @(user.IsBlocked ? "blocked" : "noBlock")><a style="color: #f7226a" asp-action="UserProfile" asp-controller="User" asp-route-id="@user.ProfileId">@user.Name</a></td>
+                                <td>@user.Bonus.ToString("F0")</td>
+                                <td>@user.IsBlocked</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>	
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="/js/SelectBlocked.js" asp-append-version="true"></script>
+}

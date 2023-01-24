@@ -1,0 +1,147 @@
+﻿@using System.Security.Claims
+@model List<Dish>
+@{
+
+    bool IsDeveloper(ClaimsPrincipal User)
+    {
+        return User.HasClaim(claim => claim.Type == ClaimTypes.Role && claim.Value == "Developer");
+    }
+    ViewBag.Title = "Блюда";
+    var StoppedDishes = Model.Where(d => !d.Available).ToList();
+}
+<section id="MenuEditor">
+    <div class="container">
+        <div>
+            <h4>Процент бонусов: @ViewBag.Bonus</h4>
+        </div>
+        <h1 class="Title">Редактор меню</h1>
+        <div class="Categories">
+            <div id='CategoryList' class="Accordion">
+            @foreach(Category category in @ViewBag.Categories){
+                <div class="Accordion-item">
+                    <div class="Accordion-item_label neutral">@category.Name</div>
+                    <div class="Accordion-item_content">
+                        <div class="Dishes">
+                        @{
+                            var dishes = Model.Where(d => d.CategoryId == category.CategoryId && d.Available).ToList();
+                        }
+                            <div class="DishList">
+                                
+                            @foreach(Dish dish in dishes){
+                                <div class="DishItem">
+                                    <div class="Dish_wrapper">
+                                        <h2 class="Dish_name">@dish.Name</h2>
+                                        <img class="Dish_img" src="@dish.ImgPath" alt="">
+                                        <p class="Dish_descrp">@dish.Description</p>
+                                        <p class="Dish_price">@dish.Price</p>
+                                    </div>
+                                    <div class="Dish_Btns">
+                                        <a role="button" class="MainBtn" asp-action="Stop" asp-controller="Dish" asp-route-id="@dish.DishId">В стоп</a>
+                                        @if (IsDeveloper(User)){
+                                            <button onclick="modalDish.showModal(@dish.DishId,`@dish.Name`, `@dish.Description`, `@dish.Price`, @category.CategoryId)" class="MainBtn EditDishBtn">Изменить</button>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            </div>
+                                @if (IsDeveloper(User))
+                                {
+                                    <button class="MainBtn AddDishBtn" onclick="modalDish.showModal(0,'', '', 0, @category.CategoryId)" >Добавить блюдо</button>
+                                }
+                            </div>
+                    </div>
+                </div>
+                }
+            </div>
+            @if (IsDeveloper(User))
+            {
+                <button id="AddCategoryBtn" class="MainBtn" onclick="addCategoryModal.showModal()">Добавить категорию</button>
+            }
+        </div>
+
+        <div class="CurrentStopList">
+            <h2>Сейчас в стоп листе</h2>
+            <div id="StopList" class="scroll-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dish</th>
+                            <th>Category</th>
+                            <th>Resume</th>
+                        </tr>
+                    </thead>
+                </table>	
+                <div class="scroll-table-body">
+                    <table>
+                        <tbody>
+                            @foreach(var stopped in StoppedDishes){
+                                <tr>
+                                    <td>@stopped.Name</td>
+                                    <td>@stopped.Category.Name</td>
+                                    <td><a role="button" class="danger" asp-action="MakeAvailable"
+                                        asp-controller="Dish" asp-route-id="@stopped.DishId">Возобновить</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>	
+            </div>
+            <a role="button" class="MainBtn" asp-action="MakeAllDishesAvailable">Возобновить все</a>
+        </div>
+    </div>
+
+    <div class="ModalWindow" id="AddCategoryModal">
+	    <div class="ModalWindow_content">
+                    <h3 class="Title">Новая категория</h3>
+                    <form id="NewCategoryForm">
+                        <div class="InputWithIcon">
+                            <ion-icon class="InputWithIcon_icon" name="restaurant-outline"></ion-icon>
+                            <input class="InputWithIcon_input" name="CategoryName" type="text" min="0" placeholder="Имя категории"/>
+                        </div>
+                        <button class="MainBtn">Добавить</button>
+		    </form>
+	    </div>
+    </div>
+
+
+    <div class="ModalWindow" id="EditDishModal">
+            <div class="ModalWindow_content">
+                <h3 class="Title">МЕГА С ДВОЙНЫМ САЛЯМИ И СЫРОМ</h3>
+                <form id="EditDishForm" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="EditDish_categoryId" name="CategoryId" />
+                    <div class="InputWithIcon">
+                        <ion-icon class="InputWithIcon_icon" name="restaurant-outline"></ion-icon>
+                        <input id="EditDish_name" name="Name" class="InputWithIcon_input" type="text" placeholder="Имя блюда"/>
+                    </div>
+                    <div class="InputWithIcon">
+                        <ion-icon class="InputWithIcon_icon" name="document-text-outline"></ion-icon>
+                        <input id="EditDish_description" name="Description" class="InputWithIcon_input" type="text" placeholder="Описание блюда"/>
+                    </div>
+                    <div class="InputWithIcon">
+                        <ion-icon class="InputWithIcon_icon" name="wallet-outline"></ion-icon>
+                        <input id="EditDish_price" name="Price" class="InputWithIcon_input" type="number" min="0" placeholder="Цена"/>
+                    </div>
+                    <label class="AwesomeFileInput">
+                        <input id="FileChanger" onchange="fileChanged()" type="file" accept=".png, .jpg, .jpeg" name="File">
+                        <div class="AwesomeFileInput_btn">
+                            <ion-icon name="image-outline"></ion-icon>
+                            Добавить фото
+                        </div>
+                        <div class="AwesomeFileInput_state">
+                            Файл не выбран
+                        </div>
+                    </label>
+                    <button class="MainBtn">Изменить</button>
+                    <button form="DeleteDishForm" class="MainBtn" id="DeleteDish">Удалить блюдо</button>
+                </form>
+                <form id="DeleteDishForm" method="post">
+                </form>
+            </div>
+     	</div>
+
+</section>
+@section Scripts{
+    <script>
+        var accordionCategories = new Accordion("#CategoryList", ".Accordion-item_label", ".Accordion-item_content"); 
+    </script>
+}

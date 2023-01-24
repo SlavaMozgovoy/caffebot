@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+} 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="/styles/main.css" asp-append-version="true">
+        <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" />
+        <title>Авторизация</title>
+    </head>
+    <body>
+       <section id="login" >
+        <div class="container" style="margin-top: -60px">
+            <div class="LoginWindow">
+                <h5 class="LoginWindow-label">Панель администратора бота Нашего Кафе</h5>
+                <div class="LoginWrapper">
+                    <img class="LoginWindow-img" src="/img/login/LoginImg.png" asp-append-version="true" alt="">
+                    <form asp-action="Auth" asp-controller="Login" class="LoginWindow-form">
+                        <div class="InputWithIcon LoginWindow-form_login">
+                            <ion-icon class="InputWithIcon_icon" name="person-outline"/></ion-icon>
+                            <input class="InputWithIcon_input" name="Login" type="text" placeholder="Login"/>
+                        </div>
+                        <div class="InputWithIcon LoginWindow-form_pass">
+                            <ion-icon class="InputWithIcon_icon" name="key-outline"/></ion-icon>
+                            <input class="InputWithIcon_input" name="Password" type="password" placeholder="Password"/>
+                        </div>
+                        <button class="LoginBtn LoginWindow-form_btn">Log in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </section>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    </body>
+</html>
